@@ -1,26 +1,22 @@
 package br.com.suellencolangelo.listchronometer.list
 
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.suellencolangelo.listchronometer.databinding.ActivityMainBinding
-import kotlinx.coroutines.flow.MutableStateFlow
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val adapter by lazy { TimerAdapter(itemsList) }
+    private val adapter by lazy {
+        TimerAdapter(itemsList) {
+            Toast.makeText(this, "Cabou Cabou", Toast.LENGTH_SHORT).show()
+            Log.i("timer", "timerOff")
+        }
+    }
 
     private val itemsList = listOf(
-        TimerModel("3:00"),
-        TimerModel("3:00"),
-        TimerModel("3:00"),
-        TimerModel("3:00"),
-        TimerModel("3:00"),
-        TimerModel("3:00"),
-        TimerModel("3:00"),
-        TimerModel("3:00"),
         TimerModel("3:00"),
         TimerModel("3:00"),
     )

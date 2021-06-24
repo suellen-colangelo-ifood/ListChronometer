@@ -2,24 +2,18 @@ package br.com.suellencolangelo.listchronometer.list
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.suellencolangelo.listchronometer.databinding.ActivityMainBinding
+import java.util.Date
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val adapter by lazy {
-        TimerAdapter(itemsList) {
-            Toast.makeText(this, "Cabou Cabou", Toast.LENGTH_SHORT).show()
-            Log.i("timer", "timerOff")
-        }
+        TimerAdapter(itemsList) { Log.i("timer", "timerOff") }
     }
 
-    private val itemsList = listOf(
-        TimerModel("3:00"),
-        TimerModel("3:00"),
-    )
+    private val itemsList by lazy { getList() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,4 +25,14 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun getList(): List<TimerModel> = mutableListOf<TimerModel>().also { list ->
+        (1..100).forEach { _ ->
+            val currentDate = Date()
+            list.add(TimerModel(
+                formattedTime = "",
+                finalTimeMills = currentDate.time + 60000,
+                timeNotifyIntervalMills = 1000,
+            ))
+        }
+    }
 }

@@ -15,6 +15,14 @@ class MainActivity : AppCompatActivity() {
     private val itemsList = listOf(
         TimerModel("3:00"),
         TimerModel("3:00"),
+        TimerModel("3:00"),
+        TimerModel("3:00"),
+        TimerModel("3:00"),
+        TimerModel("3:00"),
+        TimerModel("3:00"),
+        TimerModel("3:00"),
+        TimerModel("3:00"),
+        TimerModel("3:00"),
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,22 +33,6 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
 
-
     }
-
-    private fun getTimer(millisInFuture: Long, countDownInterval: Long) =
-        object : CountDownTimer(millisInFuture, countDownInterval) {
-
-            val onTimerChanged : MutableStateFlow<Long> = MutableStateFlow(millisInFuture)
-
-            override fun onTick(millisUntilFinished: Long) {
-                onTimerChanged.value = millisUntilFinished
-                Log.i("timer", "on timer tick")
-            }
-
-            override fun onFinish() {
-                Log.i("timer", "on timer finished")
-            }
-        }
 
 }
